@@ -17,16 +17,19 @@ class App
   end
 
   def all_people
-    people.map { |person| puts "Name: #{person.name}, ID: #{person.id}, Age: #{person.age}" }
+    people.map do |person|
+      puts "Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
+    end
   end
 
-  def add_person(*)
+  def add_person(num, age, name, arg)
     case num
     when 1
-      student = Student.new(age, name, permission)
+      classroom = 'Unknown'
+      student = Student.new(age, classroom, name, arg)
       people.push(student)
     when 2
-      teacher = Teacher.new(age, name, specialization)
+      teacher = Teacher.new(age, arg, name)
       people.push(teacher)
     else 'Invalid person'
     end
