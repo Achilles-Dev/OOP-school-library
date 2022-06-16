@@ -53,11 +53,11 @@ def create_part(option)
 end
 
 def select_all_books
-  @my_app.all_books
+  @my_app.all_books.map { |book| puts "Title: #{book.title}, Author: #{book.author}" }
 end
 
 def select_all_people
-  @my_app.all_people
+  @my_app.all_people.map { |person| puts "Name: #{person.name}, ID: #{person.id}, Age: #{person.age}" }
 end
 
 def select_person_input
@@ -120,12 +120,14 @@ def input_book_details
 end
 
 def input_rental_details
-  puts 'Select a book from the follwing list by number (not id)'
-  @my_app.all_books
+  puts 'Select a book from the following list by number (not id)'
+  @my_app.all_books.map.with_index { |book, index| puts "#{index}) Title: '#{book.title}', Author: #{book.author}" }
   book_number = gets.chomp.to_i
   puts ''
   puts 'Select a person from the follwing list by number (not id)'
-  @my_app.all_people
+  @my_app.all_people.map.with_index do |person, index|
+    puts "#{index}) Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
+  end
   person_number = gets.chomp.to_i
   puts ''
   print 'Date: '
