@@ -2,6 +2,7 @@
 
 require_relative 'app'
 require_relative 'create_service'
+require_relative 'list_service'
 
 @my_app = App.new
 
@@ -39,6 +40,7 @@ def select_option(option)
     main
   when 7
     puts 'Goodbye'
+    exit
   else
     puts 'Choose a correct option'
   end
@@ -65,4 +67,5 @@ def list_rental_by_person_id
   puts 'Rentals: '
   @my_app.rental_by_id(person_id)
 end
+
 main
