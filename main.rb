@@ -13,6 +13,19 @@ def main
   select_option(option)
 end
 
+def app_description
+  puts 'Welcome to School library App!'
+  puts ''
+  puts 'Please choose an option by entering a number:'
+  puts '1 - List all books'
+  puts '2 - List all people'
+  puts '3 - Create a person'
+  puts '4 - Create a book'
+  puts '5 - Create a rental'
+  puts '6 - List all rentals for a given person id'
+  puts '7 - Exit'
+end
+
 def select_option(option)
   case option
   when 1..2
@@ -63,19 +76,6 @@ def select_person_input
     num = $stdin.gets.to_i
     select_input(num)
   end
-end
-
-def app_description
-  puts 'Welcome to School library App!'
-  puts ''
-  puts 'Please choose an option by entering a number:'
-  puts '1 - List all books'
-  puts '2 - List all people'
-  puts '3 - Create a person'
-  puts '4 - Create a book'
-  puts '5 - Create a rental'
-  puts '6 - List all rentals for a given person id'
-  puts '7 - Exit'
 end
 
 def list_rental_by_person_id
