@@ -29,7 +29,7 @@ end
 def select_option(option)
   case option
   when 1..2
-    list_part(option)
+    list_service(option)
     main
   when 3..5
     create_service(option)
@@ -44,16 +44,6 @@ def select_option(option)
   end
 end
 
-def list_part(option)
-  case option
-  when 1
-    select_all_books
-    main
-  when 2
-    select_all_people
-    main
-  end
-end
 
 def select_all_books
   @my_app.all_books.map { |book| puts "Title: #{book.title}, Author: #{book.author}" }
