@@ -29,14 +29,11 @@ end
 
 def select_option(option)
   case option
-  when 1..2
+  when 1..2, 6
     list_service(option)
     main
   when 3..5
     create_service(option)
-    main
-  when 6
-    list_rental_by_person_id
     main
   when 7
     puts 'Goodbye'
@@ -44,28 +41,6 @@ def select_option(option)
   else
     puts 'Choose a correct option'
   end
-end
-
-def select_person_input
-  print 'Do you want to create a student (1) or a teacher (2)? [Input the number]: '
-  num = $stdin.gets.to_i
-  case num
-  when 1
-    input_student_details(num)
-  when 2
-    input_teacher_details(num)
-  else
-    print 'Input correct number: '
-    num = $stdin.gets.to_i
-    select_input(num)
-  end
-end
-
-def list_rental_by_person_id
-  print 'ID of person: '
-  person_id = $stdin.gets.to_i
-  puts 'Rentals: '
-  @my_app.rental_by_id(person_id)
 end
 
 main
