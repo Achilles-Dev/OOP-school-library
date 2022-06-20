@@ -44,15 +44,6 @@ def select_option(option)
   end
 end
 
-
-def select_all_books
-  @my_app.all_books.map { |book| puts "Title: #{book.title}, Author: #{book.author}" }
-end
-
-def select_all_people
-  @my_app.all_people.map { |person| puts "Name: #{person.name}, ID: #{person.id}, Age: #{person.age}" }
-end
-
 def select_person_input
   print 'Do you want to create a student (1) or a teacher (2)? [Input the number]: '
   num = $stdin.gets.to_i
