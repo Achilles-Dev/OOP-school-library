@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 
 require_relative 'app'
+require_relative 'create_service'
 
 @my_app = App.new
 
@@ -18,7 +19,7 @@ def select_option(option)
     list_part(option)
     main
   when 3..5
-    create_part(option)
+    create_service(option)
     main
   when 6
     list_rental_by_person_id
@@ -38,17 +39,6 @@ def list_part(option)
   when 2
     select_all_people
     main
-  end
-end
-
-def create_part(option)
-  case option
-  when 3
-    select_person_input
-  when 4
-    input_book_details
-  when 5
-    input_rental_details
   end
 end
 
@@ -86,54 +76,6 @@ def app_description
   puts '5 - Create a rental'
   puts '6 - List all rentals for a given person id'
   puts '7 - Exit'
-end
-
-def input_student_details(num)
-  print 'Age: '
-  age = $stdin.gets.to_i
-  print 'Name: '
-  name = $stdin.gets.chomp
-  print 'Has parent permission? [Y/N]: '
-  permission = $stdin.gets
-  @my_app.add_person(num, age, name, permission)
-  puts 'Person successfully created'
-end
-
-def input_teacher_details(num)
-  print 'Age: '
-  age = $stdin.gets.to_i
-  print 'Name: '
-  name = $stdin.gets.chomp
-  print 'Specialization: '
-  specialization = $stdin.gets.chomp
-  @my_app.add_person(num, age, name, specialization)
-  puts 'Person successfully created'
-end
-
-def input_book_details
-  print 'Title: '
-  title = $stdin.gets.chomp
-  print 'Author: '
-  author = $stdin.gets.chomp
-  @my_app.add_book(title, author)
-  puts 'Book successfully created'
-end
-
-def input_rental_details
-  puts 'Select a book from the following list by number (not id)'
-  @my_app.all_books.map.with_index { |book, index| puts "#{index}) Title: '#{book.title}', Author: #{book.author}" }
-  book_number = gets.chomp.to_i
-  puts ''
-  puts 'Select a person from the follwing list by number (not id)'
-  @my_app.all_people.map.with_index do |person, index|
-    puts "#{index}) Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
-  end
-  person_number = gets.chomp.to_i
-  puts ''
-  print 'Date: '
-  date = $stdin.gets
-  @my_app.add_rental(date, book_number, person_number)
-  puts 'Rental created succesfully'
 end
 
 def list_rental_by_person_id
