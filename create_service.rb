@@ -1,3 +1,8 @@
+require_relative 'student'
+require_relative 'teacher'
+require_relative 'book'
+require_relative 'rental'
+
 def create_service(option)
   case option
   when 3
@@ -14,35 +19,37 @@ def select_person_input
   num = $stdin.gets.to_i
   case num
   when 1
-    input_student_details(num)
+    input_student_details
   when 2
-    input_teacher_details(num)
+    input_teacher_details
   else
-    print 'Input correct number: '
-    num = $stdin.gets.to_i
-    select_input(num)
+    puts 'Wrong input'
+    select_person_input
   end
 end
 
-def input_student_details(num)
+def input_student_details
   print 'Age: '
   age = $stdin.gets.to_i
   print 'Name: '
   name = $stdin.gets.chomp
   print 'Has parent permission? [Y/N]: '
   permission = $stdin.gets
-  @my_app.add_person(num, age, name, permission)
+  classroom = 'Unknown'
+  student = Student.new(age, classroom, name, permission)
+  @my_app.add_person(student)
   puts 'Person successfully created'
 end
 
-def input_teacher_details(num)
+def input_teacher_details
   print 'Age: '
   age = $stdin.gets.to_i
   print 'Name: '
   name = $stdin.gets.chomp
   print 'Specialization: '
   specialization = $stdin.gets.chomp
-  @my_app.add_person(num, age, name, specialization)
+  teacher = Teacher.new(age, specialization, name)
+  @my_app.add_person(teacher)
   puts 'Person successfully created'
 end
 
@@ -51,23 +58,37 @@ def input_book_details
   title = $stdin.gets.chomp
   print 'Author: '
   author = $stdin.gets.chomp
-  @my_app.add_book(title, author)
+  book = Book.new(title, author)
+  @my_app.add_book(book)
   puts 'Book successfully created'
 end
 
 def input_rental_details
+  book_selection
+  puts ''
+  person_selection
+  puts ''
+  print 'Date (YYYY/MM/DD): '
+  date = $stdin.gets
+  rental = Rental.new(date, book, person)
+  @my_app.add_rental(rental)
+  puts 'Rental created succesfully'
+end
+
+def book_selection
   puts 'Select a book from the following list by number (not id)'
   @my_app.all_books.map.with_index { |book, index| puts "#{index}) Title: '#{book.title}', Author: #{book.author}" }
   book_number = gets.chomp.to_i
-  puts ''
-  puts 'Select a person from the follwing list by number (not id)'
+  book = @my_app.books[book_number]
+  puts 'Book selected not in the list' && book_selection if book.nil?
+end
+
+def person_selection
+  puts 'Select a person from the following list by number (not id)'
   @my_app.all_people.map.with_index do |person, index|
     puts "#{index}) Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
   end
   person_number = gets.chomp.to_i
-  puts ''
-  print 'Date: '
-  date = $stdin.gets
-  @my_app.add_rental(date, book_number, person_number)
-  puts 'Rental created succesfully'
+  person = @my_app.people[person_number]
+  puts 'Person selected not in the list' && person_selection if person.nil?
 end
