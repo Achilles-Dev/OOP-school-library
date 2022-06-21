@@ -3,6 +3,7 @@ require 'json'
 def save_data
   save_book
   save_person
+  save_rental
 end
 
 def save_book
@@ -22,4 +23,11 @@ def save_person
   end
   people = JSON.generate(people_array)
   File.write('people.json', people)
+end
+
+def save_rental
+  rental_array = @my_app.rentals.map { |rental| [rental.date, rental.book, rental.person] }
+
+  rentals = JSON.generate(rental_array)
+  File.write('rentals.json', rentals)
 end
