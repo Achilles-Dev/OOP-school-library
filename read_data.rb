@@ -7,13 +7,13 @@ def read_data
 end
 
 def read_books
-  file = File.read('books.json')
+  file = File.read('books.json') if File.exist?('books.json')
   books = JSON.parse(file) unless file.chomp.empty?
   @my_app.books = books&.map { |book| Book.new(book['title'], book['author']) } || []
 end
 
 def read_people
-  file = File.read('people.json')
+  file = File.read('people.json') if File.exist?('people.json')
   people = JSON.parse(file) unless file.chomp.empty?
   people&.map do |person|
     if person['class_instance'] == 'Student'
@@ -29,8 +29,12 @@ def read_people
 end
 
 def read_rentals
-  file = File.read('rentals.json')
+  file = File.read('rentals.json') if File.exist?('rentals.json')
   rentals = JSON.parse(file) unless file.chomp.empty?
+  add_rental(rentals)
+end
+
+def add_rental(rentals)
   @my_app.rentals = rentals&.map do |rental|
     book = @my_app.books.find { |bk| bk.title == rental['book_title'] }
     person = @my_app.people.find { |pers| pers.id == rental['person_id'] }
