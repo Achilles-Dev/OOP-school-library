@@ -30,7 +30,7 @@ end
 
 def save_rental
   rental_array = @my_app.rentals.map do |rental|
-    [class_instance: 'Rental', date: rental.date, book_title: rental.book.title, person_id: rental.person.id]
+    { class_instance: 'Rental', date: rental.date, book_title: rental.book.title, person_id: rental.person.id }
   end
   rentals = JSON.generate(rental_array)
   File.write('rentals.json', rentals)

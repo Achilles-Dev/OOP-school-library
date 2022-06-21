@@ -3,6 +3,7 @@ require 'json'
 def read_data
   read_books
   read_people
+  read_rentals
 end
 
 def read_books
@@ -24,5 +25,15 @@ def read_people
       teacher.id = person['id']
       @my_app.people.push(teacher)
     end
+  end || []
+end
+
+def read_rentals
+  file = File.read('rentals.json')
+  rentals = JSON.parse(file) unless file.chomp.empty?
+  @my_app.rentals = rentals&.map do |rental|
+    book = @my_app.books.find { |bk| bk.title == rental['book_title'] }
+    person = @my_app.people.find { |pers| pers.id == rental['person_id'] }
+    Rental.new(rental['date'], book, person)
   end || []
 end
