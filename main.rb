@@ -4,6 +4,7 @@ require_relative 'app'
 require_relative 'create_service'
 require_relative 'list_service'
 require './save_data'
+require './read_data'
 
 @my_app = App.new
 read_data

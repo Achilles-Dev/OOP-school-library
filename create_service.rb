@@ -34,7 +34,7 @@ def input_student_details
   print 'Name: '
   name = $stdin.gets.chomp
   print 'Has parent permission? [Y/N]: '
-  permission = $stdin.gets
+  permission = $stdin.gets.chomp
   classroom = 'Unknown'
   student = Student.new(age, classroom, name, permission)
   @my_app.add_person(student)
