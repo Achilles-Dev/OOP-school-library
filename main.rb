@@ -40,6 +40,7 @@ def select_option(option)
     exit
   else
     puts 'Choose a correct option'
+    main
   end
 end
 
