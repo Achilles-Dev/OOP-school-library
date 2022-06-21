@@ -12,9 +12,14 @@ def save_book
 end
 
 def save_person
-  people_array = @my_app.people.map { |person| 
-    person.class == Teacher ? [person.age, person.specialization, person.name] : [person.age, person.classroom, person.name, person.parent_permission]
-  }
+  people_array = @my_app.people.map do |person|
+    if person.instance_of?(Teacher)
+      [person.age, person.specialization,
+       person.name]
+    else
+      [person.age, person.classroom, person.name, person.parent_permission]
+    end
+  end
   people = JSON.generate(people_array)
   File.write('people.json', people)
 end
