@@ -3,9 +3,10 @@
 require_relative 'app'
 require_relative 'create_service'
 require_relative 'list_service'
+require './save_data'
 
 @my_app = App.new
-
+read_data
 def main
   app_description
 
@@ -37,6 +38,7 @@ def select_option(option)
     main
   when 7
     puts 'Goodbye'
+    save_data
     exit
   else
     puts 'Choose a correct option'
