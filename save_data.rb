@@ -7,7 +7,9 @@ def save_data
 end
 
 def save_book
-  books_array = @my_app.books.map { |book| [book.title, book.author] }
+  books_array = @my_app.books.map do |book|
+    { class_instance: 'Book', title: book.title, author: book.author }
+  end
   books = JSON.generate(books_array)
   File.write('books.json', books)
 end
@@ -15,10 +17,11 @@ end
 def save_person
   people_array = @my_app.people.map do |person|
     if person.instance_of?(Teacher)
-      [person.age, person.specialization,
-       person.name]
+      { class_instance: 'Teacher', id: person.id, age: person.age, specialization: person.specialization,
+        name: person.name }
     else
-      [person.age, person.classroom, person.name, person.parent_permission]
+      { class_instance: 'Student', id: person.id, age: person.age, classroom: person.classroom,
+        name: person.name, parent_permission: person.parent_permission }
     end
   end
   people = JSON.generate(people_array)
@@ -27,15 +30,7 @@ end
 
 def save_rental
   rental_array = @my_app.rentals.map do |rental|
-    [rental.date, rental.book.map { |book| [book.title, book.author] },
-     rental.person.map do |person|
-       if person.instance_of?(Teacher)
-         [person.age, person.specialization,
-          person.name]
-       else
-         [person.age, person.classroom, person.name, person.parent_permission]
-       end
-     end]
+    [class_instance: 'Rental', date: rental.date, book_title: rental.book.title, person_id: rental.person.id]
   end
   rentals = JSON.generate(rental_array)
   File.write('rentals.json', rentals)
