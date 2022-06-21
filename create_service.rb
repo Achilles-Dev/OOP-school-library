@@ -64,9 +64,13 @@ def input_book_details
 end
 
 def input_rental_details
+  @book_number = nil
+  @person_number = nil
   book_selection
+  book = @my_app.books[@book_number]
   puts ''
   person_selection
+  person = @my_app.people[@person_number]
   puts ''
   print 'Date (YYYY/MM/DD): '
   date = $stdin.gets
@@ -78,8 +82,8 @@ end
 def book_selection
   puts 'Select a book from the following list by number (not id)'
   @my_app.all_books.map.with_index { |book, index| puts "#{index}) Title: '#{book.title}', Author: #{book.author}" }
-  book_number = gets.chomp.to_i
-  book = @my_app.books[book_number]
+  @book_number = gets.chomp.to_i
+  book = @my_app.books[@book_number]
   puts 'Book selected not in the list' && book_selection if book.nil?
 end
 
@@ -88,7 +92,7 @@ def person_selection
   @my_app.all_people.map.with_index do |person, index|
     puts "#{index}) Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
   end
-  person_number = gets.chomp.to_i
-  person = @my_app.people[person_number]
+  @person_number = gets.chomp.to_i
+  person = @my_app.people[@person_number]
   puts 'Person selected not in the list' && person_selection if person.nil?
 end
