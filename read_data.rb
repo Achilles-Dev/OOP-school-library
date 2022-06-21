@@ -8,7 +8,7 @@ end
 def read_books
   file = File.read('books.json')
   books = JSON.parse(file) unless file.chomp.empty?
-  @my_app.books = books.map { |book| Book.new(book[0], book[1]) }
+  @my_app.books = books&.map { |book| Book.new(book[0], book[1]) } || []
 end
 
 def read_people
@@ -20,5 +20,6 @@ def read_people
     else
       Teacher.new(person[0], person[1], person[2])
     end
-  end
+  end || []
 end
+

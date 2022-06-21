@@ -73,7 +73,7 @@ def input_rental_details
   person = @my_app.people[@person_number]
   puts ''
   print 'Date (YYYY/MM/DD): '
-  date = $stdin.gets
+  date = $stdin.gets.chomp
   rental = Rental.new(date, book, person)
   @my_app.add_rental(rental)
   puts 'Rental created succesfully'
