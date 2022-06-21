@@ -13,7 +13,7 @@ end
 
 def save_person
   people_array = @my_app.people.map { |person| 
-    person.class == Teacher ? [person.age, person.name, person.specialization] : [person.age, person.name, person.classroom, person.parent_permission]
+    person.class == Teacher ? [person.age, person.specialization, person.name] : [person.age, person.classroom, person.name, person.parent_permission]
   }
   people = JSON.generate(people_array)
   File.write('people.json', people)

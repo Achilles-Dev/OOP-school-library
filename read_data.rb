@@ -7,3 +7,4 @@ def read_data
   @my_app.books = books.map { |book| Book.new(book[0], book[1]) }
   p @my_app.books
 end
+
