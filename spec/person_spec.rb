@@ -19,12 +19,23 @@ describe Person do
     end
   end
 
-  context 'Decorates name of @person' do
+  context 'Capitalizes name of @person' do
     it "should display capitalize name of @person" do
       @person.name = 'MAXImilianus'
       capitalizedPerson = CapitalizeDecorator.new(@person)
       corrected_name = capitalizedPerson.correct_name
       expected_value = 'Maximilianus'
+      expect(corrected_name).to eq(expected_value)
+    end
+  end
+
+  context 'Trims capitalized name of @person' do
+    it "should trim the capitalized name of @person" do
+      @person.name = 'MAXImilianus'
+      capitalizedPerson = CapitalizeDecorator.new(@person)
+      capitalizedTrimmedPerson = TrimmerDecorator.new(capitalizedPerson)
+      corrected_name = capitalizedTrimmedPerson.correct_name
+      expected_value = 'Maximilian'
       expect(corrected_name).to eq(expected_value)
     end
   end
