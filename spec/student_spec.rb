@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Student do
   before :each do
-    @student = Student.new(21, "Grade 5", "Tobin", "true")
+    @student = Student.new(21, 'Grade 5', 'Tobin', 'true')
   end
 
   context 'Create @student, an instance of class Student' do
