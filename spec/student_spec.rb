@@ -6,7 +6,7 @@ describe Student do
   end
 
   context 'Create @student, an instance of class Student' do
-    it 'takes one parameters and return a Student object' do
+    it 'takes four parameters and return a Student object' do
       expect(@student).to be_instance_of Student
     end
   end
