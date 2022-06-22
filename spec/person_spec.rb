@@ -2,7 +2,8 @@ require 'spec_helper'
 
 describe Person do
   before :each do
-    @person = Person.new(32)
+    @person = Person.new(32, )
+
   end
 
   context 'Create @person, an instance of class Person' do
@@ -15,6 +16,16 @@ describe Person do
     it "should display 'Unknown' as @person's name" do
       expected_value = 'Unknown'
       expect(@person.name).to eq(expected_value)
+    end
+  end
+
+  context 'Decorates name of @person' do
+    it "should display capitalize name of @person" do
+      @person.name = 'MAXImilianus'
+      capitalizedPerson = CapitalizeDecorator.new(@person)
+      corrected_name = capitalizedPerson.correct_name
+      expected_value = 'Maximilianus'
+      expect(corrected_name).to eq(expected_value)
     end
   end
 end
