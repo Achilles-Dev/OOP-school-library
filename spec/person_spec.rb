@@ -2,8 +2,7 @@ require 'spec_helper'
 
 describe Person do
   before :each do
-    @person = Person.new(32, )
-
+    @person = Person.new(32)
   end
 
   context 'Create @person, an instance of class Person' do
@@ -20,21 +19,21 @@ describe Person do
   end
 
   context 'Capitalizes name of @person' do
-    it "should display capitalize name of @person" do
+    it 'should display capitalize name of @person' do
       @person.name = 'MAXImilianus'
-      capitalizedPerson = CapitalizeDecorator.new(@person)
-      corrected_name = capitalizedPerson.correct_name
+      capitalized_person = CapitalizeDecorator.new(@person)
+      corrected_name = capitalized_person.correct_name
       expected_value = 'Maximilianus'
       expect(corrected_name).to eq(expected_value)
     end
   end
 
   context 'Trims capitalized name of @person' do
-    it "should trim the capitalized name of @person" do
+    it 'should trim the capitalized name of @person' do
       @person.name = 'MAXImilianus'
-      capitalizedPerson = CapitalizeDecorator.new(@person)
-      capitalizedTrimmedPerson = TrimmerDecorator.new(capitalizedPerson)
-      corrected_name = capitalizedTrimmedPerson.correct_name
+      capitalized_person = CapitalizeDecorator.new(@person)
+      capitalized_trimmed_person = TrimmerDecorator.new(capitalized_person)
+      corrected_name = capitalized_trimmed_person.correct_name
       expected_value = 'Maximilian'
       expect(corrected_name).to eq(expected_value)
     end

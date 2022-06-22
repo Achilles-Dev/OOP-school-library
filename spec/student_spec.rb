@@ -17,7 +17,7 @@ describe Student do
       expect(@student.age).to eq(expected_value)
     end
   end
-  
+
   context 'Check whether student is of age to use service' do
     it 'should return true if student can use service' do
       @student.age = 13
